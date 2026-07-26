@@ -6,6 +6,10 @@ import { Env } from "@/types/env";
 // Variables populated by the `supabaseAuth` middleware.
 export type AuthVariables = {
   supabaseContext: SupabaseContext;
+  accessUSer: {
+    email: string;
+    sub: string;
+  };
 };
 
 export type ValidContext<

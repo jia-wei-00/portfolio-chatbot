@@ -47,8 +47,10 @@ export const createDocument = async (c: ValidContext<TAdminDocument>) => {
 };
 
 export const listDocuments = async (c: AuthContext) => {
+  const { email, sub } = c.var.accessUSer;
+
   try {
-    return c.json({ message: "working" });
+    return c.json({ email, sub });
   } catch (error) {
     console.error("List documents failed:", error);
     return c.json({ error: "Failed to load documents" }, 500);

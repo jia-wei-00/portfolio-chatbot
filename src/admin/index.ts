@@ -47,7 +47,7 @@ export const createDocument = async (c: ValidContext<TAdminDocument>) => {
 };
 
 export const listDocuments = async (c: AuthContext) => {
-  const { email, sub } = c.var.accessUSer;
+  const { email, sub } = c.var.accessUser;
 
   try {
     return c.json({ email, sub });

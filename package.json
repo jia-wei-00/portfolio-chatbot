@@ -3,21 +3,30 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --mode client && vite build",
     "preview": "$npm_execpath run build && vite preview",
     "deploy": "$npm_execpath run build && wrangler deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
-    "@openai/agents": "^0.12.0",
+    "@ai-sdk/google": "^3.0.91",
+    "@ai-sdk/openai-compatible": "^3.0.12",
+    "@google/genai": "^2.10.0",
+    "@hono/zod-validator": "^0.9.0",
+    "@openai/agents": "^0.13.2",
+    "@openai/agents-extensions": "^0.13.5",
+    "@supabase/server": "^1.4.1",
+    "@supabase/supabase-js": "^2.110.8",
+    "ai": "^7.0.28",
     "hono": "^4.12.27",
+    "honox": "^0.1.59",
     "jose": "^6.2.3",
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "^1.2.3",
+    "@hono/vite-build": "^1.11.1",
+    "@hono/vite-dev-server": "^0.26.1",
     "vite": "^6.3.5",
-    "vite-ssr-components": "^0.6.1",
     "wrangler": "^4.17.0"
   }
 }

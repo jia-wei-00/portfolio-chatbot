@@ -1,8 +1,13 @@
-export interface SupabaseJwtPayload {
-  sub: string;
-  email?: string;
-  role?: string;
-  aud: string;
-  exp: number;
-  [key: string]: string;
+import { Env } from "@/types/env";
+import type { SupabaseContext } from "@supabase/server";
+
+export interface IAuthMiddleware {
+  Bindings: Env;
+  Variables: {
+    supabaseContext: SupabaseContext;
+    accessUser?: {
+      email?: string;
+      sub?: string;
+    };
+  };
 }

@@ -1,13 +1,23 @@
-import { Agent, run } from "@openai/agents";
-import { Context } from "hono";
+import { run } from "@openai/agents";
+import { createAiSdkUiMessageStreamResponse } from "@openai/agents-extensions/ai-sdk-ui";
+import {
+  createNvidiaAgent,
+  createGenAiAgent,
+  createMercuryAgent,
+} from "@/agent/model";
+import { ValidContext } from "@/types/common";
+import { TAgentPrompt } from "@/types/agent/prompt";
 
-const agent = new Agent({
-  name: "History tutor",
-  instructions: "You answer history questions clearly and concisely.",
-  model: "gpt-5.5",
-});
-
-export const agentAsk = async (c: Context) => {
-  const result = await run(agent, "When did the Roman Empire fall?");
-  return c.json({ result });
+export const agentPrompt = async (c: ValidContext<TAgentPrompt>) => {
+  try {
+    const { message } = c.req.valid("json");
+    const agent = createNvidiaAgent({
+      env: c.env,
+    });
+    const resultStream = await run(agent, message, { stream: true });
+    return createAiSdkUiMessageStreamResponse(resultStream);
+  } catch (error) {
+    console.error("Agent run failed:", error);
+    return c.json({ error: "Agent run failed" }, 500);
+  }
 };

@@ -1,0 +1,191 @@
+:root {
+  --bg: #0f1115;
+  --surface: #1a1d24;
+  --surface-hover: #222630;
+  --border: #2a2f3a;
+  --text: #e6e8eb;
+  --text-muted: #9aa2b1;
+  --text-faint: #6b7280;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --error: #f87171;
+  --error-border: #7f1d1d;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  color-scheme: dark;
+}
+
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.admin {
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 640px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  color: var(--text);
+}
+
+.admin .subtitle {
+  color: var(--text-muted);
+  margin-top: -0.5rem;
+}
+
+.admin form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.admin textarea,
+.admin input {
+  width: 100%;
+  padding: 0.75rem;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.admin textarea::placeholder,
+.admin input::placeholder {
+  color: var(--text-faint);
+}
+
+.admin textarea:focus,
+.admin input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.admin .logout {
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.9rem;
+}
+
+.admin .logout:hover {
+  background: var(--surface-hover);
+}
+
+.admin button {
+  align-self: flex-start;
+  padding: 0.6rem 1.2rem;
+  font: inherit;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.admin button:hover {
+  background: var(--accent-hover);
+}
+
+.admin button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.admin .status {
+  min-height: 1.2em;
+  color: var(--accent);
+}
+
+.admin .tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.admin .tab {
+  align-self: auto;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  text-transform: capitalize;
+}
+
+.admin .tab:hover {
+  background: var(--surface-hover);
+}
+
+.admin .tab.active {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.admin .tab .tab-count {
+  opacity: 0.7;
+  font-size: 0.75rem;
+}
+
+.admin .list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin .doc-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.admin .doc-category {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.admin .list li {
+  padding: 0.75rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.admin .list small {
+  color: var(--text-faint);
+  font-size: 0.75rem;
+}
+
+.admin .list .error {
+  color: var(--error);
+  border-color: var(--error-border);
+}

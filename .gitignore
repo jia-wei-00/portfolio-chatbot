@@ -33,3 +33,12 @@ lerna-debug.log*
 
 # misc
 .DS_Store
+
+# credentials
+serviceAccountKey.json
+*service-account*.json
+
+# local agent settings
+.claude/settings.local.json
+.codex/config.toml
+.mcp.json

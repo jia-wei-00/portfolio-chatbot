@@ -1,5 +1,4 @@
 import { Hono } from "hono";
-import { cors } from "hono/cors";
 import { csrf } from "hono/csrf";
 import { logger } from "hono/logger";
 import { prettyJSON } from "hono/pretty-json";
@@ -9,11 +8,12 @@ import agent from "@/routes/agent.routes";
 import whatsapp from "@/routes/whatsapp.routes";
 import admin from "@/routes/admin.routes";
 import { Env } from "@/types/env";
+import { strictAgentOrigin } from "@/middlewares/cors";
 
 // The JSON API, mounted under /api by the HonoX server entry (app/server.ts).
 export const api = new Hono<{ Bindings: Env }>()
   .use("*", logger())
-  .use("*", cors())
+  .use("*", strictAgentOrigin)
   .use("*", csrf())
   .use("*", prettyJSON())
   .use("*", secureHeaders())

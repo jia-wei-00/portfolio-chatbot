@@ -14,16 +14,20 @@ export type AuthVariables = {
 
 export type ValidContext<
   T,
-  Target extends keyof ValidationTargets = "json",
+  Target extends keyof ValidationTargets = "json" | "query",
 > = Context<
-  { Bindings: Env; Variables: AuthVariables },
+  ICommonContext,
   string,
   { in: Record<Target, T>; out: Record<Target, T> }
 >;
 
-// For handlers without a validated body (e.g. GET routes) that still need the
-// authenticated context variables.
-export type AuthContext = Context<{
-  Bindings: Env;
+export type TContext = Context<ICommonContext>;
+
+export interface ICommonContext {
+  Bindings: AppBindings;
   Variables: AuthVariables;
-}>;
+}
+
+export type AppBindings = Omit<CloudflareBindings, "VECTORIZE"> & {
+  VECTORIZE: Vectorize;
+};

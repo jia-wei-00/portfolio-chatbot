@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "portfolio-chatbot",
-  "compatibility_date": "2025-08-03",
+  "compatibility_date": "2026-07-08",
   "compatibility_flags": ["nodejs_compat"],
   "main": "./dist/index.js",
   "assets": {
@@ -11,13 +11,19 @@
     {
       "name": "AGENT_LIMITER",
       "namespace_id": "1001",
-      "simple": { "limit": 10, "period": 60 },
+      "simple": {
+        "limit": 10,
+        "period": 60,
+      },
     },
   ],
   "observability": {
     "logs": {
       "enabled": true,
       "invocation_logs": true,
+    },
+    "traces": {
+      "enabled": true,
     },
   },
   "vars": {
@@ -29,5 +35,48 @@
     "NVIDIA_MODEL": "nvidia/nemotron-3-ultra-550b-a55b",
     "EMBEDDING_MODEL": "gemini-embedding-2",
     "TEAM_DOMAIN": "https://leongjw98.cloudflareaccess.com",
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "match_portfolio_documents",
+      "database_id": "5340a744-825c-4ab3-ae68-eb4a265b26e6",
+      "remote": true,
+    },
+  ],
+  "vectorize": [
+    {
+      "binding": "VECTORIZE",
+      "index_name": "portfolio-index",
+      "remote": true,
+    },
+  ],
+  "queues": {
+    "producers": [
+      {
+        "binding": "DOCUMENT_DELETIONS_QUEUE",
+        "queue": "portfolio-chatbot-document-deletions",
+      },
+      {
+        "binding": "DOCUMENT_CREATIONS_QUEUE",
+        "queue": "portfolio-chatbot-document-creations",
+      },
+    ],
+    "consumers": [
+      {
+        "queue": "portfolio-chatbot-document-deletions",
+        "max_batch_size": 10,
+        "max_batch_timeout": 5,
+        "max_retries": 5,
+        "dead_letter_queue": "portfolio-chatbot-document-deletions-dlq",
+      },
+      {
+        "queue": "portfolio-chatbot-document-creations",
+        "max_batch_size": 10,
+        "max_batch_timeout": 5,
+        "max_retries": 5,
+        "dead_letter_queue": "portfolio-chatbot-document-creations-dlq",
+      },
+    ],
   },
 }

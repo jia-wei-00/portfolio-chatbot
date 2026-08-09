@@ -1,18 +1,17 @@
 import { run } from "@openai/agents";
 import { createAiSdkUiMessageStreamResponse } from "@openai/agents-extensions/ai-sdk-ui";
-import {
-  createNvidiaAgent,
-  createGenAiAgent,
-  createMercuryAgent,
-} from "@/agent/model";
+import { createGenAiAgent } from "@/agent/model";
 import { ValidContext } from "@/types/common";
 import { TAgentPrompt } from "@/types/agent/prompt";
+import { createRetrievePortfolioTool } from "@/agent/tools/retrievePortfolio";
 
 export const agentPrompt = async (c: ValidContext<TAgentPrompt>) => {
   try {
-    const { message } = c.req.valid("json");
-    const agent = createNvidiaAgent({
-      env: c.env,
+    const { env, req } = c;
+    const { message } = req.valid("json");
+    const agent = createGenAiAgent({
+      env,
+      tools: [createRetrievePortfolioTool(env)],
     });
     const resultStream = await run(agent, message, { stream: true });
     return createAiSdkUiMessageStreamResponse(resultStream);

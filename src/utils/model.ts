@@ -1,4 +1,4 @@
-import { ICreateAgent } from "@/types/utils/model";
+import { TCreateAgent } from "@/types/utils/model";
 import { Agent, OpenAIChatCompletionsModel } from "@openai/agents";
 import OpenAI from "openai";
 import { SYSTEM_PROMPT } from "@/constant/agent";
@@ -7,13 +7,17 @@ export const createAgent = ({
   baseURL,
   apiKey,
   model,
+  customModel,
   ...rest
-}: ICreateAgent) => {
-  const client = new OpenAI({ baseURL, apiKey });
+}: TCreateAgent) => {
+  const selectedModel = customModel
+    ? customModel
+    : new OpenAIChatCompletionsModel(new OpenAI({ baseURL, apiKey }), model);
+
   return new Agent({
     ...rest,
-    name: "Assistant",
-    instructions: "assistant" || SYSTEM_PROMPT,
-    model: new OpenAIChatCompletionsModel(client, model),
+    name: rest.name ?? "Assistant",
+    instructions: rest.instructions ?? SYSTEM_PROMPT,
+    model: selectedModel,
   });
 };

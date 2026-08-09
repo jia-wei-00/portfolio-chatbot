@@ -10,7 +10,7 @@ export default <T extends z.ZodType, Target extends keyof ValidationTargets>(
     if (!result.success) {
       return c.json(
         {
-          message: "Invalid request body",
+          message: `Invalid ${target} from request`,
           errors: JSON.parse(result.error.message),
         },
         422,

@@ -1,13 +1,18 @@
 import { z } from "zod";
-import { documentSchema } from "@/schemas/admin";
+import {
+  documentSchema,
+  deleteDocumentSchema,
+  creationKeySchema,
+  documentStatusRow,
+} from "@/schemas/admin";
+import { AppBindings } from "@/types/common";
 
 export type TAdminDocument = z.infer<typeof documentSchema>;
+export type TDeleteDocument = z.infer<typeof deleteDocumentSchema>;
+export type TCreationKey = z.infer<typeof creationKeySchema>;
+export type TDocumentStatusRow = z.infer<typeof documentStatusRow>;
 
-// A row returned to the client (without the large embedding vector).
-export interface IPortfolioDocument {
-  id: string;
-  title: string | null;
-  category: string | null;
-  content: string | null;
-  created_at: string | null;
+export interface IConsumerProps {
+  batch: MessageBatch<unknown>;
+  env: AppBindings;
 }

@@ -5,9 +5,18 @@ import {
 } from "../constant/agent";
 import { ICreateModelAgent } from "@/types/agent/model";
 import { createAgent } from "@/utils/model";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import { aisdk } from "@openai/agents-extensions/ai-sdk";
 
-export const createGenAiAgent = ({ env, ...rest }: ICreateModelAgent) =>
-  createAgent({ ...rest, name: "gemini", ...getGeminiConfig(env) });
+export const createGenAiAgent = ({ env, ...rest }: ICreateModelAgent) => {
+  const { apiKey, model } = getGeminiConfig(env);
+  const google = createGoogleGenerativeAI({ apiKey });
+  return createAgent({
+    ...rest,
+    name: "gemini",
+    customModel: aisdk(google(model)),
+  });
+};
 
 export const createMercuryAgent = ({ env, ...rest }: ICreateModelAgent) =>
   createAgent({ ...rest, name: "mercury", ...getMercuryConfig(env) });

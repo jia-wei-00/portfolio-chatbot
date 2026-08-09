@@ -13,7 +13,7 @@ export const strictAgentOrigin = createMiddleware<{ Bindings: AppBindings }>(
 
     return cors({
       origin: allowedOrigin,
-      allowMethods: ["GET"],
+      allowMethods: ["GET", "POST"],
       allowHeaders: ["Content-Type"],
       maxAge: 86400,
     })(c, next);

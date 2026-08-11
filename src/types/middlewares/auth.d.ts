@@ -1,8 +1,8 @@
-import { Env } from "@/types/env";
+import type { AppBindings } from "@/types/common";
 import type { SupabaseContext } from "@supabase/server";
 
 export interface IAuthMiddleware {
-  Bindings: Env;
+  Bindings: AppBindings;
   Variables: {
     supabaseContext: SupabaseContext;
     accessUser?: {

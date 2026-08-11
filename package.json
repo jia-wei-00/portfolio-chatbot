@@ -11,6 +11,7 @@
   "dependencies": {
     "@ai-sdk/google": "^3.0.91",
     "@ai-sdk/openai-compatible": "^3.0.12",
+    "@braintrust/openai-agents": "^0.1.5",
     "@google/genai": "^2.10.0",
     "@hono/zod-validator": "^0.9.0",
     "@openai/agents": "^0.13.2",
@@ -18,6 +19,7 @@
     "@supabase/server": "^1.4.1",
     "@supabase/supabase-js": "^2.110.8",
     "ai": "^7.0.28",
+    "braintrust": "^3.27.0",
     "hono": "^4.12.27",
     "honox": "^0.1.59",
     "jose": "^6.2.3",

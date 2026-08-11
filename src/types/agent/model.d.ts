@@ -1,8 +1,8 @@
-import { Env } from "@/types/env";
+import type { AppBindings } from "@/types/common";
 import { AgentOptions } from "@openai/agents";
 
 export interface ICreateModelAgent
   extends Omit<AgentOptions, "model" | "name"> {
-  env: Env;
+  env: AppBindings;
   name?: string;
 }

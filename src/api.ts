@@ -7,11 +7,11 @@ import { timing } from "hono/timing";
 import agent from "@/routes/agent.routes";
 import whatsapp from "@/routes/whatsapp.routes";
 import admin from "@/routes/admin.routes";
-import { Env } from "@/types/env";
+import type { AppBindings } from "@/types/common";
 import { strictAgentOrigin } from "@/middlewares/cors";
 
 // The JSON API, mounted under /api by the HonoX server entry (app/server.ts).
-export const api = new Hono<{ Bindings: Env }>()
+export const api = new Hono<{ Bindings: AppBindings }>()
   .use("*", logger())
   .use("*", strictAgentOrigin)
   .use("*", csrf())

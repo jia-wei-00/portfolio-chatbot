@@ -1,7 +1,6 @@
 import type { Context } from "hono";
 import type { ValidationTargets } from "hono";
 import type { SupabaseContext } from "@supabase/server";
-import { Env } from "@/types/env";
 
 // Variables populated by the `supabaseAuth` middleware.
 export type AuthVariables = {

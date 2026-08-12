@@ -4,7 +4,7 @@ import { createGenAiAgent } from "@/agent/model";
 import { ValidContext } from "@/types/common";
 import { TAgentPrompt } from "@/types/agent/prompt";
 import { createRetrievePortfolioTool } from "@/agent/tools/retrievePortfolio";
-import { traceFlush } from "@/utils/trace";
+import { scheduleTraceFlush } from "@/utils/trace";
 
 export const agentPrompt = async (c: ValidContext<TAgentPrompt>) => {
   try {
@@ -15,11 +15,11 @@ export const agentPrompt = async (c: ValidContext<TAgentPrompt>) => {
       tools: [createRetrievePortfolioTool(env)],
     });
     const resultStream = await run(agent, message, { stream: true });
-    return createAiSdkUiMessageStreamResponse(resultStream);
+    const response = createAiSdkUiMessageStreamResponse(resultStream);
+    scheduleTraceFlush(c, resultStream.completed);
+    return response;
   } catch (error) {
     console.error("Agent run failed:", error);
     return c.json({ error: "Agent run failed" }, 500);
-  } finally {
-    traceFlush(c);
   }
 };

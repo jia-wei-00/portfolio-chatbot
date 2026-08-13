@@ -1,8 +1,7 @@
 import z from "zod";
+import { protocol } from "@openai/agents";
 
-export const promptSchema = z.object({
-  message: z.string(),
-});
+export const promptSchema = z.array(protocol.ModelItem).min(1);
 
 export const retrievePortfolioParameters = z.object({
   query: z

@@ -6,7 +6,10 @@
     "build": "vite build --mode client && vite build",
     "preview": "$npm_execpath run build && vite preview",
     "deploy": "$npm_execpath run build && wrangler deploy",
-    "cf-typegen": "wrangler types ./src/types/worker-configuration.d.ts --env-interface CloudflareBindings"
+    "cf-typegen": "wrangler types ./src/types/worker-configuration.d.ts --env-interface CloudflareBindings",
+    "prepare": "husky",
+    "lint": "eslint",
+    "format": "prettier --write"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.91",
@@ -29,7 +32,22 @@
     "@cloudflare/workers-types": "^5.20260804.1",
     "@hono/vite-build": "^1.11.1",
     "@hono/vite-dev-server": "^0.26.1",
+    "eslint": "^10.8.1",
+    "globals": "^17.11.0",
+    "husky": "^9.1.7",
+    "jiti": "^2.7.0",
+    "lint-staged": "^17.3.0",
+    "typescript-eslint": "^8.67.0",
     "vite": "^6.3.5",
     "wrangler": "^4.118.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,css,scss}": [
+      "prettier --write"
+    ]
   }
 }

@@ -1,7 +1,5 @@
 import { ValidContext } from "@/types/common";
 import { IConsumerProps, TAdminDocument } from "@/types/admin/document";
-import { OpenAI } from "openai";
-import { getEmbeddingConfig } from "@/constant/agent";
 import { consumeDocumentSchema } from "@/schemas/admin";
 import { generateEmbedding } from "@/services/embedding/generate";
 

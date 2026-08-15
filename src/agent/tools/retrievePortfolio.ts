@@ -10,7 +10,7 @@ export const createRetrievePortfolioTool = (env: AppBindings) =>
     description:
       "Search Jia Wei's portfolio documents for relevant background, skills, projects, experience, education, and contact information.",
     parameters: retrievePortfolioParameters,
-    execute: async ({ query }, args) => {
+    execute: async ({ query }) => {
       {
         const documentIds = await searchDocuments(env, query);
         if (documentIds.length === 0) {

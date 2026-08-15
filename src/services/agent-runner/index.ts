@@ -2,8 +2,6 @@ import {
   run,
   type Agent,
   type AgentInputItem,
-  type RunState,
-  type StreamedRunResult,
   type StreamRunOptions,
 } from "@openai/agents";
 import type { TContext } from "@/types/common";
